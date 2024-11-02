@@ -1,1 +1,1 @@
-This for a test
+This repository is for learning Django.
