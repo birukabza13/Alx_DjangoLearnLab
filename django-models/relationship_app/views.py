@@ -22,11 +22,9 @@ class RegisterView(CreateView):
 
 
 class LoginView(LoginView):
-    template_name = "relationship_app/login.html"
-
+    pass
 
 class LogoutView(LogoutView):
-    template_name = "relationship_app/logout.html"
     next_page = reverse_lazy("login")
 
 
