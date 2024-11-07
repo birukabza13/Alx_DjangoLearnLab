@@ -1,6 +1,6 @@
 from .models import Book, Library, Librarian, Author
 
-
+author_name, library_name = None, None
 # Query all books by a specific author.
 author = Author.objects.get(name=author_name)
 books = Book.objects.filter(author=author)
