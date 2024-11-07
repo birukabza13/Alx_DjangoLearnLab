@@ -5,8 +5,9 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.contrib.auth import login
+from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test
 
 
 class LibraryDetailView(DetailView):
@@ -36,8 +37,6 @@ def list_books(request):
     context = {"books": book}
     return render(request, "relationship_app/list_books.html", context)
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import user_passes_test
 
 def is_admin(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == "Admin"
