@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Library
 from .models import Book
@@ -42,5 +43,5 @@ def is_admin(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == "Admin"
 
 @user_passes_test(is_admin)
-def AdminView(request):
-    return render(request, 'relationship_app/admin_view.html')
+def admin_view(request):
+    return HttpResponse("Welcome to Admin Dashboard")
