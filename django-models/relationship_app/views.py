@@ -7,6 +7,6 @@ def list_books(request):
     context = {
         "books": book
     }
-
-    return render(request, 'relationship_app/book_list.html', context)
+    
+    return render(request, 'relationship_app/list_books.html', context)
 
