@@ -57,33 +57,32 @@ def is_member(user):
 @user_passes_test(is_admin)
 def admin_view(request):
     context = {
-        'role': 'Admin',
-        'message': 'Welcome, Admin!',
-        'total_books': 150,  
-        'total_members': 50, 
-        'total_librarians': 5  
+        "role": "Admin",
+        "message": "Welcome, Admin!",
+        "total_books": 150,
+        "total_members": 50,
+        "total_librarians": 5,
     }
-    return render(request, 'admin_view.html', context)
+    return render(request, "relationship_app/admin_view.html", context)
+
 
 @user_passes_test(is_librarian)
 def librarian_view(request):
     context = {
-        'role': 'Librarian',
-        'message': 'Welcome, Librarian!',
-        'assigned_books': 120,  
-        'total_members': 50 
+        "role": "Librarian",
+        "message": "Welcome, Librarian!",
+        "assigned_books": 120,
+        "total_members": 50,
     }
-    return render(request, 'librarian_view.html', context)
+    return render(request, "relationship_app/librarian_view.html", context)
 
 
 @user_passes_test(is_member)
 def member_view(request):
     context = {
-        'role': 'Member',
-        'message': 'Welcome, Member!',
-        'borrowed_books': 5,  
-        'membership_expiration': '2024-12-31'  
+        "role": "Member",
+        "message": "Welcome, Member!",
+        "borrowed_books": 5,
+        "membership_expiration": "2024-12-31",
     }
-    return render(request, 'member_view.html', context)
-
-
+    return render(request, "relationship_app/member_view.html", context)
