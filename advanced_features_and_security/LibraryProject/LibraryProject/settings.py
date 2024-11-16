@@ -29,7 +29,7 @@ DEBUG = False
 SECURE_BROWSER_XSS_FILTER = True
 
 # Prevent the website from being displayed in an iframe to avoid clickjacking
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = "DENY"
 
 # Prevent the browser from guessing the content types for resources (MIME sniffing)
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -38,6 +38,35 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
+# Redirect all non-HTTPS requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# Set HSTS max age (e.g., 1 year in seconds)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+
+# Apply HSTS to all subdomains
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Indicate this site is HSTS-preload-ready
+SECURE_HSTS_PRELOAD = True
+
+# Ensure session cookies are transmitted only over HTTPS
+SESSION_COOKIE_SECURE = True
+
+# Ensure CSRF cookies are transmitted only over HTTPS
+CSRF_COOKIE_SECURE = True
+
+# Protect against clickjacking by preventing your site from being framed
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent browsers from guessing the content type and enforce the declared Content-Type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable browser's built-in XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_PROXY_SSL_HEADER = True
+HTTP_X_FORWARDED_PROTO = True
 
 ALLOWED_HOSTS = []
 
@@ -52,7 +81,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookshelf.apps.BookshelfConfig",
-    "relationship_app.apps.RelationshipAppConfig"
+    "relationship_app.apps.RelationshipAppConfig",
 ]
 
 MIDDLEWARE = [
