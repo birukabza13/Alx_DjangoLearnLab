@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 
 from .models import Book
 from .forms import BookForm
+from .forms import ExampleForm
+
 
 
 @permission_required("bookshelf.can_create", raise_exception=True)
