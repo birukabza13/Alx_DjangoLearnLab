@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookshelf.apps.BookshelfConfig",
-    "relationship_app.apps.RelationshipAppConfig",
+    "relationship_app.apps.RelationshipAppConfig"
 ]
 
 MIDDLEWARE = [
@@ -101,10 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Custom User
-AUTH_USER_MODEL = "relationship_app.UserProfile"
-
+AUTH_USER_MODEL = "bookshelf.CustomUser"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

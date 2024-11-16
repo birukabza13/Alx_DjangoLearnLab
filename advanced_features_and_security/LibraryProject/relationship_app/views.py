@@ -45,15 +45,10 @@ def list_books(request):
 
 
 def role_required(role):
-    def decorator(view_func):
-        def _wrapped_view(request, *args, **kwargs):
-            if not hasattr(request.user, "userprofile") or request.user.userprofile.role != role:
-                from django.http import HttpResponseForbidden
-                return HttpResponseForbidden(f"Access restricted to {role} users.")
-            return view_func(request, *args, **kwargs)
-        return _wrapped_view
-    return decorator
+    def decorator(user):
+        return hasattr(user, "userprofile") and user.userprofile.role == role
 
+    return decorator
 
 
 @user_passes_test(role_required("Admin"))
