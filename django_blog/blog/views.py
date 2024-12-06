@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
 
 class UserRegisterView(CreateView):
@@ -46,6 +47,8 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
             else:
                 return self.form_invalid(form)
         return super().post(request, *args, **kwargs)
+
+
 class PostListView(ListView):
     model = Post
     template_name = "blog/post_list.html"
@@ -56,8 +59,6 @@ class PostDetailView(DetailView):
     model = Post
     template_name = "blog/post_detail.html"
     context_object_name = "post"
-
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
