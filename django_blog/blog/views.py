@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import (
     CreateView,
     UpdateView,
@@ -11,9 +11,10 @@ from django.views.generic import (
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 class UserRegisterView(CreateView):
@@ -99,6 +100,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return post.author == self.request.user
 
     success_url = reverse_lazy("post_list")
+
+
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
@@ -134,3 +137,30 @@ class CommentDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy("post_detail", kwargs={"pk": self.object.post.pk})
+
+
+def search_posts(request):
+    query = request.GET.get("q", "")
+    posts = Post.objects.filter(
+        Q(title__icontains=query)
+        | Q(content__icontains=query)
+        | Q(tags__name__icontains=query)
+    ).distinct()
+    return render(request, "blog/search_results.html", {"posts": posts, "query": query})
+
+
+def posts_by_tag(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    posts = tag.posts.all()
+    return render(request, "blog/posts_by_tag.html", {"posts": posts, "tag": tag})
+
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'posts_by_tag.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        tag_name = self.kwargs['tag_name']
+        tag = get_object_or_404(Tag, name=tag_name)
+
+        return Post.objects.filter(tags=tag)

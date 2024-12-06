@@ -24,4 +24,11 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"pk": self.post.pk})
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    post = models.ManyToManyField(Post, related_name="tags")
+
+    def __str__(self):
+        return self.name
+
 
