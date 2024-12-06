@@ -14,4 +14,13 @@ class PostForm(forms.ModelForm):
         fields = ["title", "content", "tags"]
     
         tags = forms.CharField(widget=TagWidget()) 
+    
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content"]
+        widgets = {
+            "content": forms.Textarea(attrs={"rows": 4, "cols": 50}),
+        }
 
