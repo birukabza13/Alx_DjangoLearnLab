@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "accounts",
     "rest_framework.authtoken",
     "posts",
+    "Notification",
 ]
 
 MIDDLEWARE = [
@@ -72,7 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "social_media_api.wsgi.application"
-AUTH_USER_MODEL = 'accounts.MyUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 # Database
