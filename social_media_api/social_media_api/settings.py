@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "accounts",
     "rest_framework.authtoken",
     "posts",
-    "Notification",
+    "notifications",
 ]
 
 MIDDLEWARE = [
