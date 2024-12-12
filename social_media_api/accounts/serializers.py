@@ -3,13 +3,13 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 
-MyUser = get_user_model().objects.create_user
+CustomUser = get_user_model().objects.create_user
 
 class CustomUserSerializer(serializers.ModelSerializer):
     token = serializers.CharField()
 
     class Meta:
-        model = MyUser
+        model = CustomUser
         fields = [
             "id",
             "username",

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class MyUser(AbstractUser):
+class CustomUser(AbstractUser):
     bio = models.TextField(max_length=500, blank=True, null=True)
 
     profile_picture = models.ImageField(
@@ -10,7 +10,10 @@ class MyUser(AbstractUser):
     )
 
     followers = models.ManyToManyField(
-        "self", symmetrical=False, related_name="following"
+        "self", symmetrical=False, related_name="followed_by"
+    )
+    following = models.ManyToManyField(
+        "self", symmetrical=False, related_name="following_set"
     )
 
     def __str__(self):

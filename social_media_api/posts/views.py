@@ -62,7 +62,8 @@ class CommentViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN,
             )
         return super().destroy(request, *args, **kwargs)
-
+    
+# Post.objects.filter(author__in=following_users).order_by
 
 class FeedView(generics.ListAPIView):
     serializer_class = PostSerializer
